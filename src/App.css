@@ -1,42 +1,94 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+nav {
+  position: sticky;
+  top: 0;
+  background-color: #f8a95a;  
+  z-index: 1000;  
+  padding: 10px;  
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0); 
+  border-radius: 10px;
+}
+
+
+
+nav a {
+  margin-right: 8px; 
+  margin-left: 8px;
+  text-decoration: none; 
+  color: #333;
+}
+
+nav a:hover {
+  color: #007bff; 
+}
+
+ul {
+  list-style-type: none; /* Removes bullet points */
+  padding: 0; /* Removes default padding */
+  text-align: center; /* Centers text */
+}
+
+ul li {
+  display: block;
+}
+
+.overlay-buttons {
+  position: fixed; /* Keeps buttons in place */
+  bottom: 20%; /* Adjust the distance from the bottom of the screen */
+  right: 24%; /* Ensure there is some padding from the right edge */
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  gap: 10px; /* Reduced gap between buttons to fit them better */
+  z-index: 150; /* Ensures buttons are above the TV image */
+  max-width: 700px; /* Prevents the buttons from stretching too wide */
+}
+
+/* Button images */
+.nav-button {
+  width: 90px; /* Adjust the size of the buttons */
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  max-width: 100%; /* Prevent buttons from overflowing */
+}
+
+.nav-button:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Adjust individual buttons' margins if needed */
+.home-btn {
+  margin-bottom: 10px; /* Adds space between the buttons */
+}
+
+.about-btn {
+  margin-top: 10px;
+}
+
+.screen{
+  position: absolute;
+  width: 550px;
+  z-index: -1;
+  right: 40%;
+  bottom: 10%;
+}
+
+.screen-content {
+  left: 550px;
+  bottom: 150px;
+  position: absolute;
+}
+
+.about-screen {
+  left: 520px;
+  bottom: 150px;
+  position: absolute;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  width: 16%;
+  height:auto;
+  position: absolute;
+  left: 34%;
+  bottom: 60%;
 }

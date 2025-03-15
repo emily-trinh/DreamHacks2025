@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 //Firebase import
 import db from '../backend/firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
+import tv from '../assets/tv.png';
+import logo from '../assets/logo.png';
 
 function Home() {
 
@@ -23,14 +25,22 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="app">
+      {/* Image */}
+      <img src={tv} alt="tv" className="tv-image" />
+
+      <img src={logo} alt='logo' className='logo'></img>
+
+      <div className='screen-content'>
+        <h1>Home</h1>
       <h2>Song List</h2>
       <ul>
         {songs.map((song, index) => (
           <li key={song.id || index}>{song.title || "Untitled Song"}</li>
         ))}
       </ul>
+      </div>
+      
     </div>
   );
 }
