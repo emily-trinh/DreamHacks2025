@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import AudioPlayer from './AudioPlayer';
 
 //Firebase import
 import db from '../backend/firebase';
@@ -7,6 +8,9 @@ import { collection, onSnapshot } from 'firebase/firestore';
 function Home() {
 
   const [songs, setSong] = useState([]);
+  const [story, setStory] = useState('');  // State to hold the transcription result
+  const [loading, setLoading] = useState(false);
+
 
   console.log(songs);
 
@@ -22,8 +26,7 @@ function Home() {
     return () => unsubscribe();
   }, []);
 
-  const [story, setStory] = useState('');  // State to hold the transcription result
-  const [loading, setLoading] = useState(false);
+  
 
   // Handle the button click to send the request for transcription
   const fetchTranscription = async () => {
@@ -62,6 +65,13 @@ function Home() {
         {loading ? 'Transcribing...' : 'Transcribe Audio'}
       </button>
       <p>{story}</p>  {/* Display the transcription result */}
+      {/* Only show AudioPlayer if story is not empty */}
+      
+        {story && story !== 'An error occurred while transcribing the audio.' && (
+        <>
+          <AudioPlayer /> {/* Show the AudioPlayer */}
+        </>
+      )}
     </div>
   );
 }

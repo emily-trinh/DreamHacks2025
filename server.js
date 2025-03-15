@@ -23,7 +23,7 @@ app.use(express.json());
 app.post('/api/whisper-test', async (req, res) => {
   try {
     // Read the file (hardcoded redcrayon.mp3)
-    const filePath = 'happy-birthday-25448.wav';  // The hardcoded file path
+    const filePath = 'chainsawman.wav';  // The hardcoded file path
     const fileStream = fs.createReadStream(filePath);
 
     // Send the audio file to the OpenAI Whisper API for transcription
