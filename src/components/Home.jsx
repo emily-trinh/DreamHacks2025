@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import AudioPlayer from './AudioPlayer';
 
 //Firebase import
 import db from '../backend/firebase';
@@ -9,6 +10,9 @@ import logo from '../assets/logo.png';
 function Home() {
 
   const [songs, setSong] = useState([]);
+  const [story, setStory] = useState('');  // State to hold the transcription result
+  const [loading, setLoading] = useState(false);
+
 
   console.log(songs);
 
@@ -24,6 +28,32 @@ function Home() {
     return () => unsubscribe();
   }, []);
 
+  
+
+  // Handle the button click to send the request for transcription
+  const fetchTranscription = async () => {
+    setLoading(true);  // Show loading state while waiting for the transcription
+
+    try {
+      const response = await fetch('http://localhost:5000/api/whisper-test', {
+        method: 'POST',  // Send a POST request to fetch the transcription
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to transcribe audio');
+      }
+
+      const data = await response.json();
+      setStory(data.transcription);  // Set the transcription result in state
+    } catch (error) {
+      console.error('Error fetching transcription:', error);
+      setStory('An error occurred while transcribing the audio.');  // Show error message
+    } finally {
+      setLoading(false);  // Hide loading state after the transcription
+    }
+  };
+
+
   return (
     <div className="app">
       {/* Image */}
@@ -32,15 +62,16 @@ function Home() {
       <img src={logo} alt='logo' className='logo'></img>
 
       <div className='screen-content'>
-        <h1>Home</h1>
-      <h2>Song List</h2>
-      <ul>
-        {songs.map((song, index) => (
-          <li key={song.id || index}>{song.title || "Untitled Song"}</li>
-        ))}
-      </ul>
+        <button onClick={fetchTranscription} disabled={loading}>
+          {loading ? 'Transcribing...' : 'Transcribe Audio'}
+        </button>
+        <p>{story}</p>
+        {story && story !== 'An error occurred while transcribing the audio.' && (
+          <>
+            <AudioPlayer /> {/* Show the AudioPlayer */}
+          </>
+        )}
       </div>
-      
     </div>
   );
 }

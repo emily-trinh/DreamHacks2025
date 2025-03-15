@@ -74,9 +74,10 @@ ul li {
 }
 
 .screen-content {
-  left: 550px;
-  bottom: 150px;
+  left: 470px;
+  bottom: 225px;
   position: absolute;
+  text-align: center;
 }
 
 .about-screen {
