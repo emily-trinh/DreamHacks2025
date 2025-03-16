@@ -33,7 +33,7 @@ const AudioPlayer = () => {
   return (
     <div>
       {/* <p>Audio Player with Controls</p> */}
-      <button onClick={handlePlayPause} disabled={!isTranscriptionDone}>
+      <button onClick={handlePlayPause} disabled={!isTranscriptionDone} className='play-button'>
         {isTranscriptionDone ? 'Play / Pause' : 'Waiting for transcription...'}
       </button>
       <audio ref={audioRef} src="../../instrumental.wav" />
